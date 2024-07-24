@@ -19,7 +19,7 @@ export const DESSERTS = [
     _id: "3",
     dessertName: "macaron",
     dessertPrice: 3.99,
-    imgUrl: '../assets/images/image-waffle-macaron.jpg',
+    imgUrl: '../assets/images/image-macaron-desktop.jpg',
     description: "Delicate and colorful",
   },
   {

@@ -7,7 +7,7 @@ class DessertList extends Component {
     return (
       <DessertPageContext.Consumer>
         {({ dessertData }) => (
-          <div className="p-2 flex flex-wrap gap-5">
+          <div className="p-2 md:p-5 flex flex-wrap lg:gap-2 lg:mx-0 md:gap-1 md:flex-row sm:gap-2 sm:mx-[5%]">
             {dessertData.map((dessert, i) => (
               <DessertCard
                 key={i}

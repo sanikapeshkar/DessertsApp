@@ -1,8 +1,14 @@
 
-  export const content = ["./src/**/*.{html,js,jsx,tsx}"];
-  export const theme = {
-  extend: {},
-  };
-  export const plugins = []; 
-  
-  
+
+  export default {
+    content: ["./src/**/*.{js,ts,jsx,tsx}"],
+    theme: {
+      extend: {
+     screens:{
+       md:"760px",
+       sm:'100px'
+    },
+   },
+    },
+    plugins: [],
+  }
