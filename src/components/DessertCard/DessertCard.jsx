@@ -17,7 +17,7 @@ function DessertCard({ id, src, name, desc, price }) {
   return (
     <div className={`relative lg:min-w-[26%] md:min-w-[26%] mx-2 my-5 rounded-xl md:mx-1 sm:min-w-[80%]`}>
       <img
-        className={`h-[13rem] rounded-lg ${
+        className={`h-[13rem] w-[13rem] rounded-lg ${
           count > 0 ? "border-2 border-red-700" : "border-0"
         }`}
         src={src}
