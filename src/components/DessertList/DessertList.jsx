@@ -1,25 +1,26 @@
-import { Component } from "react";
-import { DESSERTS } from "../../DessertData";
+import React, { Component } from "react";
 import DessertCard from "../DessertCard/DessertCard";
+import { DessertPageContext } from "../../context/DessertPageContext";
 
 class DessertList extends Component {
   render() {
     return (
-      <div
-        className="p-2 flex
-flex-wrap gap-5"
-      >
-        {DESSERTS.map((dessert, i) => {
-          return (
-            <DessertCard
-              src={dessert.imgUrl}
-              name={dessert.dessertName}
-              desc={dessert.description}
-              price={dessert.dessertPrice}
-            />
-          );
-        })}
-      </div>
+      <DessertPageContext.Consumer>
+        {({ dessertData }) => (
+          <div className="p-2 flex flex-wrap gap-5">
+            {dessertData.map((dessert, i) => (
+              <DessertCard
+                key={i}
+                id={dessert.id}
+                src={dessert.imgUrl}
+                name={dessert.dessertName}
+                desc={dessert.description}
+                price={dessert.dessertPrice}
+              />
+            ))}
+          </div>
+        )}
+      </DessertPageContext.Consumer>
     );
   }
 }

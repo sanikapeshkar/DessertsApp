@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { DessertPageContext } from "../../context/DessertPageContext"; 
 import Counter from "../Counter/Counter";
 import AddToCart from "../AddtoCart/AddtoCart";
 
-function DessertCard({ src, name, desc, price }) {
+function DessertCard({ id, src, name, desc, price }) {
   const [count, setCount] = useState(0);
-
+  const { addToCart, removeFromCart } = useContext(DessertPageContext); 
   function handleDecrement() {
     setCount((prevCount) => (prevCount > 0 ? prevCount - 1 : 0));
   }
@@ -14,7 +15,7 @@ function DessertCard({ src, name, desc, price }) {
   }
 
   return (
-    <div className={`relative w-[26%] mx-2 my-5 rounded-xl `}>
+    <div className={`relative w-[26%] mx-2 my-5 rounded-xl`}>
       <img
         className={`h-[13rem] rounded-lg ${
           count > 0 ? "border-2 border-red-700" : "border-0"
@@ -22,16 +23,16 @@ function DessertCard({ src, name, desc, price }) {
         src={src}
         alt={name}
       />
-      {!count && (
+      {!count ? (
         <AddToCart
           onClick={() => {
             setCount(1);
+            addToCart(id); 
           }}
         >
           <h2 className="text-md">Add to cart</h2>
         </AddToCart>
-      )}
-      {count > 0 && (
+      ) : (
         <Counter
           count={count}
           handleDecrement={handleDecrement}
