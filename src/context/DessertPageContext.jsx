@@ -38,6 +38,11 @@ class DessertPageContextProvider extends Component {
     }));
   };
 
+  handleNewOrder=()=>{
+    this.setState((prevState)=>({
+      cartData:[]
+    }))
+  }
   render() {
     return (
       <DessertPageContext.Provider
@@ -46,6 +51,7 @@ class DessertPageContextProvider extends Component {
           cartData: this.state.cartData,
           addToCart: this.addToCart,
           removeFromCart: this.removeFromCart,
+          handleNewOrder:this.handleNewOrder
         }}
       >
         {this.props.children}

@@ -28,11 +28,11 @@ class YourCart extends Component {
 
     return (
       <DessertPageContext.Consumer>
-        {({ cartData }) => (
+        {({ cartData,handleNewOrder }) => (
           <div className="w-full lg:w-[100%] lg:my-16 md:w-[80%] ">
             <div className="my-5 md:my-2 h-max lg:p-4 md:p-3 sm:p-2 rounded-xl border bg-white">
               <h2 className="text-red-700 lg:text-xl font-bold md:text-lg sm:text-md">
-                Your Cart ({count})
+                Your Cart ({cartData.length})
               </h2>
               <OrderItemList  />
 
@@ -40,7 +40,7 @@ class YourCart extends Component {
                 This is a carbon neutral delivery
               </div>
             </div>
-            {open && <OrderPopup onClose={this.onClose} />}
+            {open && <OrderPopup onClose={this.onClose} handleNewOrder={handleNewOrder}/>}
             <div className="flex justify-center">
               <Button
                 onClick={() => {

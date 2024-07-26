@@ -4,15 +4,14 @@ import Counter from "../Counter/Counter";
 import AddToCart from "../AddtoCart/AddtoCart";
 
 function DessertCard({ id, src, name, desc, price }) {
-  
   const [count, setCount] = useState(0);
-  const { addToCart, removeFromCart } = useContext(DessertPageContext);
+  const { addToCart, removeFromCart, cart } = useContext(DessertPageContext);
 
   function handleDecrement() {
     setCount((prevCount) => {
       const newCount = prevCount > 0 ? prevCount - 1 : 0;
       if (newCount === 0) {
-        removeFromCart(id,count);
+        removeFromCart(id, count);
       } else {
         addToCart(id, newCount);
       }
@@ -39,7 +38,7 @@ function DessertCard({ id, src, name, desc, price }) {
         src={src}
         alt={name}
       />
-      {!count ? (
+      {!count  ? (
         <AddToCart
           onClick={() => {
             setCount(1);

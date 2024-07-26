@@ -6,7 +6,7 @@ function OrderItemList() {
   return (
     <DessertPageContext.Consumer>
       {({ cartData,removeFromCart }) => (
-        <div className="flex flex-col my-1 p-2 border-b-2 rounded-lg gap-2">
+        <div className="flex flex-col my-10 p-2 border-b-2 rounded-lg gap-2">
           {cartData.map((orderItem) => (
             <div key={orderItem._id} className="flex justify-between items-center">
               <div>
