@@ -10,9 +10,9 @@ class YourCart extends Component {
 
     this.state = {
       open: false,
+      totalPrice: 0,
     };
 
-    // Bind the method in the constructor
     this.onClose = this.onClose.bind(this);
   }
 
@@ -22,29 +22,48 @@ class YourCart extends Component {
     });
   }
 
+  calculateTotal(cartData) {
+    let totalAmount = 0;
+    cartData.forEach((item) => {
+      totalAmount += item.dessertPrice * Number(item.quantity);
+    });
+    return totalAmount.toFixed(2);
+  }
+
   render() {
     const { count } = this.props;
     const { open } = this.state;
 
     return (
       <DessertPageContext.Consumer>
-        {({ cartData,handleNewOrder }) => (
+        {({ cartData, handleNewOrder, totalAmount }) => (
           <div className="w-full lg:w-[100%] lg:my-16 md:w-[80%] ">
             <div className="my-5 md:my-2 h-max lg:p-4 md:p-3 sm:p-2 rounded-xl border bg-white">
               <h2 className="text-red-700 lg:text-xl font-bold md:text-lg sm:text-md">
                 Your Cart ({cartData.length})
               </h2>
-              <OrderItemList  />
-
+              <OrderItemList />
+              <div className="flex ">
+                <h2>Total amount :</h2>
+                <h2>$ {this.calculateTotal(cartData)}</h2>
+              </div>
               <div className="my-2 p-3 md:p-2 text-md md:text-sm bg-rose-50 rounded-xl">
                 This is a carbon neutral delivery
               </div>
             </div>
-            {open && <OrderPopup onClose={this.onClose} handleNewOrder={handleNewOrder}/>}
+            {open && (
+              <OrderPopup
+                onClose={this.onClose}
+                handleNewOrder={handleNewOrder}
+                totalAmount={this.calculateTotal(cartData)}
+              />
+            )}
             <div className="flex justify-center">
               <Button
                 onClick={() => {
-                  this.setState({ open: true });
+                  cartData.length > 0
+                    ? this.setState({ open: true })
+                    : alert("Please add items to the cart");
                 }}
               >
                 Confirm Your Order
