@@ -14,19 +14,27 @@ class DessertPageContextProvider extends Component {
   }
 
   addToCart = (id, count) => {
-    const newData = this.state.cartData.filter((f) => f._id === id);
-    const dataWithQuantity = {
-      ...newData,
-      quantity: count,
-    };
-    this.setState((prevState) => ({
-      cartData: [...prevState.cartData, dataWithQuantity],
-    }));
+    this.setState((prevState) => {
+      const itemInCart = prevState.cartData.find((item) => item._id === id);
+
+      if (itemInCart) {
+        return {
+          cartData: prevState.cartData.map((item) =>
+            item._id === id ? { ...item, quantity: count } : item
+          ),
+        };
+      } else {
+        const newItem = this.state.dessertData.find((item) => item._id === id);
+        return {
+          cartData: [...prevState.cartData, { ...newItem, quantity: count }],
+        };
+      }
+    });
   };
+
   removeFromCart = (id) => {
-    const newData = this.state.cartData.filter((f) => f._id !== id);
     this.setState((prevState) => ({
-      cartData: newData,
+      cartData: prevState.cartData.filter((item) => item._id !== id),
     }));
   };
 
