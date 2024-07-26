@@ -12,6 +12,7 @@ function OrderItemList() {
               <div>
                 <h3>{orderItem.dessertName}</h3>
                 <p className="text-red-700 text-sm">1 X {orderItem.quantity}</p>
+                <h4>$ {orderItem.dessertPrice}</h4>
               </div>
               <IoIosCloseCircleOutline
                 className="m-2 cursor-pointer"
