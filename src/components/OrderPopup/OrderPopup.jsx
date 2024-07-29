@@ -2,9 +2,10 @@ import { IoCheckmarkDoneCircle } from "react-icons/io5";
 import OrderItem from "../OrderItem/OrderItem";
 import { Button } from "../Button/Button";
 import { twMerge } from "tailwind-merge";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AiFillEdit } from "react-icons/ai";
-import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
+import { IoIosClose } from "react-icons/io";
+import { DessertPageContext } from "../../context/DessertPageContext";
 function OrderPopup({
   onClose,
   handleNewOrder,
@@ -13,6 +14,9 @@ function OrderPopup({
   onConfirmation,
 }) {
   const [edit, setEdit] = useState(false);
+
+  const {cartData}=useContext(DessertPageContext);
+
   return (
     <div
       className={twMerge(
@@ -26,27 +30,46 @@ function OrderPopup({
       >
         {confirmed ? (
           <div className="mb-2">
-            <IoCheckmarkDoneCircle className="text-green-500 text-4xl mb-2" size={30}/>
+            <IoCheckmarkDoneCircle
+              className="text-green-500 text-4xl mb-2"
+              size={30}
+            />
             <h3 className="text-black text-3xl font-bold">Order Confirmed</h3>
             <p className="mb-5 mt-2 mx-1 text-slate-400 text-sm">
-             We hope you enjoy your food !
+              We hope you enjoy your food !
             </p>
           </div>
         ) : (
           <div className="flex gap-10  justify-between">
-            <p className="font-semibold text-xl mb-5">Kindly confirm your order </p>
-            {edit ? (
-            <h3 onClick={() => setEdit(false)} className="text-slate-600 underline">Save</h3>
-            ) : (
-              <AiFillEdit
-                onClick={() => setEdit(true)}
-                size={35}
-                className="border border-slate-300 rounded-full p-2 "
+            <p className="font-semibold text-xl mb-5">
+              Kindly confirm your order{" "}
+            </p>
+
+            <div className="flex gap-5">
+              {edit ? (
+                <h3
+                  onClick={() => setEdit(false)}
+                  className="text-slate-600 underline"
+                >
+                  Save
+                </h3>
+              ) : (
+                <AiFillEdit
+                  onClick={() => setEdit(true)}
+                  size={35}
+                  className="border border-slate-300 rounded-full p-2 "
+                />
+              )}
+
+              <IoIosClose
+                onClick={() => onClose()}
+                size={31}
+                className="border rounded-full cursor-pointer"
               />
-            )}
+            </div>
           </div>
         )}
-        <OrderItem edit={edit} />
+        <OrderItem edit={edit} onClose={onClose}/>
 
         <div className="p-2 flex justify-between bg-rose-50 text-slate-500">
           <h2 className="font-semibold">Order Total :</h2>

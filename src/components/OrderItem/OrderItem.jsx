@@ -2,7 +2,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import { DessertPageContext } from "../../context/DessertPageContext";
 import Counter from "../Counter/Counter";
 
-function OrderItemList({ edit }) {
+function OrderItemList({ edit, onClose }) {
   return (
     <DessertPageContext.Consumer>
       {({
@@ -25,7 +25,6 @@ function OrderItemList({ edit }) {
                     <h3 className="font-semibold">{orderItem.dessertName}</h3>
                     <div className="flex gap-1">
                       <p className="text-red-700 font-bold text-sm">
-                     
                         {orderItem.quantity}x
                       </p>
                       <div className="flex gap-10 text-slate-400 text-sm italic font-semibold">
@@ -49,11 +48,19 @@ function OrderItemList({ edit }) {
                     </div>
                   </div>
                 </div>
-                {edit &&
-                <IoIosCloseCircleOutline
-                  className="m-2 cursor-pointer"
-                  onClick={() => removeFromCart(orderItem._id)}
-                />}
+                {edit && (
+                  <IoIosCloseCircleOutline
+                    className="m-2 cursor-pointer"
+                    onClick={() => {
+                      if (cartData.length === 1) {
+                        removeFromCart(orderItem._id);
+                        onClose();
+                      } else {
+                        removeFromCart(orderItem._id);
+                      }
+                    }}
+                  />
+                )}
               </div>
             ))}
         </div>

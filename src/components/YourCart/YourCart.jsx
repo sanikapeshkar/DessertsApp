@@ -128,6 +128,7 @@ class YourCart extends Component {
                 totalAmount={this.calculateTotal(cartData)}
                 confirmed={this.state.confirmed}
                 onConfirmation={this.onConfirmation}
+            
               />
             )}
 
