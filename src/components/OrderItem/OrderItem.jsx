@@ -1,25 +1,61 @@
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { DessertPageContext } from "../../context/DessertPageContext";
+import Counter from "../Counter/Counter";
 
-function OrderItemList() {
-
+function OrderItemList({ edit }) {
   return (
     <DessertPageContext.Consumer>
-      {({ cartData,removeFromCart }) => (
-        <div className="flex flex-col my-10 p-2 border-b-2 rounded-lg gap-2">
-          {cartData.map((orderItem) => (
-            <div key={orderItem._id} className="flex justify-between items-center">
-              <div>
-                <h3>{orderItem.dessertName}</h3>
-                <p className="text-red-700 text-sm">1 X {orderItem.quantity}</p>
-                <h4>$ {orderItem.quantity*orderItem.dessertPrice}</h4>
+      {({
+        cartData,
+        removeFromCart,
+        count,
+        handleDecrement,
+        handleIncrement,
+      }) => (
+        <div className=" h-max flex flex-col ">
+          {cartData.length > 0 &&
+            cartData.map((orderItem) => (
+              <div
+                key={orderItem._id}
+                className="flex justify-between items-center bg-rose-50  border-b p-2 rounded-sm"
+              >
+                <div className="flex gap-4 align-center">
+                  <img src={orderItem.imgUrl} className="h-16 w-16"></img>
+                  <div>
+                    <h3 className="font-semibold">{orderItem.dessertName}</h3>
+                    <div className="flex gap-1">
+                      <p className="text-red-700 font-bold text-sm">
+                     
+                        {orderItem.quantity}x
+                      </p>
+                      <div className="flex gap-10 text-slate-400 text-sm italic font-semibold">
+                        <h4>
+                          @ ${orderItem.quantity * orderItem.dessertPrice}
+                        </h4>
+                        {edit && (
+                          <Counter
+                            id={orderItem._id}
+                            count={count[orderItem._id]}
+                            handleDecrement={() =>
+                              handleDecrement(orderItem._id)
+                            }
+                            handleIncrement={() =>
+                              handleIncrement(orderItem._id)
+                            }
+                            editCounter={edit}
+                          />
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {edit &&
+                <IoIosCloseCircleOutline
+                  className="m-2 cursor-pointer"
+                  onClick={() => removeFromCart(orderItem._id)}
+                />}
               </div>
-              <IoIosCloseCircleOutline
-                className="m-2 cursor-pointer"
-                onClick={() => removeFromCart(orderItem._id)}
-              />
-            </div>
-          ))}
+            ))}
         </div>
       )}
     </DessertPageContext.Consumer>

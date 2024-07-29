@@ -26,6 +26,7 @@ function DessertCard({ id, src, name, desc, price }) {
           count={count[id]}
           handleDecrement={() => handleDecrement(id)}
           handleIncrement={() => handleIncrement(id)}
+          editCounter={false}
         />
       )}
       <h4 className="mt-7 text-gray-400">{name}</h4>

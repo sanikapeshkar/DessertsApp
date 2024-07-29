@@ -12,7 +12,7 @@ class DessertList extends Component {
               <DessertCard
                 key={i}
                 id={dessert._id}
-                src={"https://media.istockphoto.com/id/497959594/photo/fresh-cakes.jpg?s=612x612&w=0&k=20&c=T1vp7QPbg6BY3GE-qwg-i_SqVpstyHBMIwnGakdTTek="}
+                src={dessert.imgUrl ||"https://media.istockphoto.com/id/497959594/photo/fresh-cakes.jpg?s=612x612&w=0&k=20&c=T1vp7QPbg6BY3GE-qwg-i_SqVpstyHBMIwnGakdTTek="}
                 name={dessert.dessertName}
                 desc={dessert.description}
                 price={dessert.dessertPrice}

@@ -2,8 +2,17 @@ import { IoCheckmarkDoneCircle } from "react-icons/io5";
 import OrderItem from "../OrderItem/OrderItem";
 import { Button } from "../Button/Button";
 import { twMerge } from "tailwind-merge";
-
-function OrderPopup({ onClose, handleNewOrder, totalAmount }) {
+import { useState } from "react";
+import { AiFillEdit } from "react-icons/ai";
+import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
+function OrderPopup({
+  onClose,
+  handleNewOrder,
+  totalAmount,
+  confirmed,
+  onConfirmation,
+}) {
+  const [edit, setEdit] = useState(false);
   return (
     <div
       className={twMerge(
@@ -15,27 +24,51 @@ function OrderPopup({ onClose, handleNewOrder, totalAmount }) {
           "relative w-[90%] sm:w-[75%] md:w-[60%] lg:w-[50%] max-h-[100%] p-8 bg-white rounded-sm overflow-y-auto"
         )}
       >
-        <IoCheckmarkDoneCircle className="text-green-500 text-4xl mb-4" />
-        <h3 className="text-black text-3xl font-bold">Order Confirmed</h3>
-        <p className="my-1 mx-1 text-slate-400 text-md font-normal">
-          Hope you enjoyed your food!
-        </p>
-        <OrderItem />
+        {confirmed ? (
+          <div className="mb-2">
+            <IoCheckmarkDoneCircle className="text-green-500 text-4xl mb-2" size={30}/>
+            <h3 className="text-black text-3xl font-bold">Order Confirmed</h3>
+            <p className="mb-5 mt-2 mx-1 text-slate-400 text-sm">
+             We hope you enjoy your food !
+            </p>
+          </div>
+        ) : (
+          <div className="flex gap-10  justify-between">
+            <p className="font-semibold text-xl mb-5">Kindly confirm your order </p>
+            {edit ? (
+            <h3 onClick={() => setEdit(false)} className="text-slate-600 underline">Save</h3>
+            ) : (
+              <AiFillEdit
+                onClick={() => setEdit(true)}
+                size={35}
+                className="border border-slate-300 rounded-full p-2 "
+              />
+            )}
+          </div>
+        )}
+        <OrderItem edit={edit} />
 
-        <div className="flex ">
-          <h2>Total amount :</h2>
+        <div className="p-2 flex justify-between bg-rose-50 text-slate-500">
+          <h2 className="font-semibold">Order Total :</h2>
           <h2>$ {totalAmount}</h2>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 mx-5 mt-5 mb-4">
-          <Button
-            onClick={() => {
-              onClose();
-              handleNewOrder();
-            }}
-          >
-            Start New Order
-          </Button>
-        </div>
+
+        {confirmed ? (
+          <div className=" bottom-0 left-0 right-0 mx-2 mt-5 mb-4">
+            <Button
+              onClick={() => {
+                onClose();
+                handleNewOrder();
+              }}
+            >
+              Start New Order
+            </Button>
+          </div>
+        ) : (
+          <div className="flex gap-5 bottom-0 left-0 right-0 mx-2 mt-5 mb-4 cursor-pointer">
+            <Button onClick={() => onConfirmation()}>Confirm my order</Button>
+          </div>
+        )}
       </div>
     </div>
   );
