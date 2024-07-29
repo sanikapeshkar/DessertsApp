@@ -3,7 +3,9 @@ import { Button } from "../Button/Button";
 import OrderPopup from "../OrderPopup/OrderPopup";
 import { DessertPageContext } from "../../context/DessertPageContext";
 import OrderItemList from "../OrderItem/OrderItem";
-import EmptyCartImage from "../../../assets/images/illustration-empty-cart.svg";
+import { Alert } from "antd";
+
+
 class YourCart extends Component {
   constructor(props) {
     super(props);
@@ -12,6 +14,7 @@ class YourCart extends Component {
       open: false,
       totalPrice: 0,
       confirmed: false,
+      alert:false
     };
 
     this.onClose = this.onClose.bind(this);
@@ -45,7 +48,10 @@ class YourCart extends Component {
     return (
       <DessertPageContext.Consumer>
         {({ cartData, handleNewOrder, totalAmount }) => (
+
           <div className="w-max lg:w-[100%] lg:my-16 md:w-[80%] ">
+            {this.state.alert && ( <Alert message="Please Add Items to the Cart" type="warning" closable  />
+      )}
             <div className="my-5 md:my-2 h-max lg:p-4 md:p-3 sm:p-2 rounded-xl border bg-white">
               <h2 className="mb-10 text-red-700 lg:text-xl font-bold md:text-lg sm:text-md">
                 Your Cart ({cartData.length})
@@ -137,9 +143,12 @@ class YourCart extends Component {
                 onClick={() => {
                   cartData.length > 0
                     ? this.setState({ open: true })
-                    : alert("Please add items to the cart");
+                    :  this.setState({ alert: true })
+
+                    
                 }}
               >
+         
                 Confirm Your Order
               </Button>
             </div>
