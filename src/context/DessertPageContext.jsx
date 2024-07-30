@@ -34,7 +34,7 @@ class DessertPageContextProvider extends Component {
 
     if (itemInCart) {
       newCount = itemInCart.quantity - 1;
-      if (newCount < 1) {
+      if (newCount < 1) { 
         this.setState({
           count: { ...this.state.count, [id]: newCount },
         });
@@ -48,11 +48,12 @@ class DessertPageContextProvider extends Component {
   };
 
   addToCart = (id, count) => {
-    const itemInCart = this.state.cartData.find((item) => item._id === id);
+
+        const itemInCart = this.state.cartData.find((item) => item._id === id);
     const newItem = this.state.dessertData.find((item) => item._id === id);
     let newCartData, newCount;
 
-    if (itemInCart) {
+    if (itemInCart ) {
       newCount = count;
       newCartData = this.state.cartData.map((item) =>
         item._id === id ? { ...item, quantity: newCount } : item

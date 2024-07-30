@@ -29,7 +29,7 @@ function OrderItemList({ edit, onClose }) {
                       </p>
                       <div className="flex gap-10 text-slate-400 text-sm italic font-semibold">
                         <h4>
-                          @ ${orderItem.quantity * orderItem.dessertPrice}
+                          @ ${(orderItem.quantity * orderItem.dessertPrice).toFixed(2)}
                         </h4>
                         {edit && (
                           <Counter
