@@ -2,7 +2,7 @@ import { IoCheckmarkDoneCircle } from "react-icons/io5";
 import OrderItem from "../OrderItem/OrderItem";
 import { Button } from "../Button/Button";
 import { twMerge } from "tailwind-merge";
-import { useContext, useEffect, useState } from "react";
+import {  useState } from "react";
 import { AiFillEdit } from "react-icons/ai";
 import { IoIosClose } from "react-icons/io";
 import { Alert } from "antd";
@@ -30,7 +30,8 @@ function OrderPopup({
       >
         
         {confirmed ? (
-          <div className="mb-2">
+          <div className="flex justify-between mb-2">
+            <div>
             <IoCheckmarkDoneCircle
               className="text-green-500 text-4xl mb-2"
               size={30}
@@ -40,6 +41,12 @@ function OrderPopup({
               We hope you enjoy your food !
             </p>
             {alert && <Alert message="Your Order is Confirmed" type="success" closable  />}
+            </div>
+            <IoIosClose
+                onClick={() => {  handleNewOrder();onClose();}}
+                size={31}
+                className="border rounded-full cursor-pointer"
+              />
           </div>
         ) : (
           <div className="flex gap-10  justify-between">
@@ -91,7 +98,7 @@ function OrderPopup({
           </div>
         ) : (
           <div className="flex gap-5 bottom-0 left-0 right-0 mx-2 mt-5 mb-4 cursor-pointer">
-            <Button onClick={() => {onConfirmation();setAlert(true)}}>Confirm my order</Button>
+            <Button onClick={() => {onConfirmation();setAlert(true);setEdit(false)}}>Confirm my order</Button>
           </div>
         )}
       </div>

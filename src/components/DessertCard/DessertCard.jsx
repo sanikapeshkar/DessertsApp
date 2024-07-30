@@ -17,7 +17,7 @@ function DessertCard({ id, src, name, desc, price }) {
         alt={name}
       />
       {!count[id] ? (
-        <AddToCart onClick={() => addToCart(id, 1)}>
+        <AddToCart onClick={() => handleIncrement(id)}>
           <h2 className="text-md">Add to cart</h2>
         </AddToCart>
       ) : (

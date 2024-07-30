@@ -6,7 +6,6 @@ export const DessertPageContext = createContext();
 class DessertPageContextProvider extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       dessertData: DESSERTS,
       cartData: [],
@@ -15,61 +14,50 @@ class DessertPageContextProvider extends Component {
   }
 
   handleIncrement = (id) => {
-    const itemInCart = this.state.cartData.find((item) => item._id === id);
-    let newCount;
+    const increementedItem = this.state.cartData.find(
+      (item) => item._id === id
+    );
 
-    if (itemInCart) {
-      newCount = itemInCart.quantity + 1;
+    if (increementedItem) {
+      this.setState({
+        cartData: this.state.cartData.map((item) =>
+          item._id === id
+            ? { ...item, quantity: increementedItem.quantity + 1 }
+            : item
+        ),
+        count: { ...this.state.count, [id]: increementedItem.quantity + 1 },
+      });
     } else {
       const newItem = this.state.dessertData.find((item) => item._id === id);
-      newCount = 1;
+      this.setState({
+        cartData: [...this.state.cartData, { ...newItem, quantity: 1 }],
+        count: { ...this.state.count, [id]: 1 },
+      });
     }
-
-    this.addToCart(id, newCount);
   };
 
   handleDecrement = (id) => {
-    const itemInCart = this.state.cartData.find((item) => item._id === id);
-    let newCount;
+    const decreementedItem = this.state.cartData.find(
+      (item) => item._id === id
+    );
+    if (decreementedItem) {
+      this.setState({
+        cartData: this.state.cartData.map((item) =>
+          item._id === id
+            ? { ...item, quantity: decreementedItem.quantity - 1 }
+            : item
+        ),
+        count: { ...this.state.count, [id]: decreementedItem.quantity - 1 },
+      });
 
-    if (itemInCart) {
-      newCount = itemInCart.quantity - 1;
-      if (newCount < 1) { 
+      //check if decreemented quantity is 0
+      if (decreementedItem.quantity - 1 < 1) {
         this.setState({
-          count: { ...this.state.count, [id]: newCount },
+          count: { ...this.state.count, [id]: decreementedItem.quantity - 1 },
         });
         this.removeFromCart(id);
-      } else {
-        this.addToCart(id, newCount);
       }
-    } else {
-      newCount = 1;
     }
-  };
-
-  addToCart = (id, count) => {
-
-        const itemInCart = this.state.cartData.find((item) => item._id === id);
-    const newItem = this.state.dessertData.find((item) => item._id === id);
-    let newCartData, newCount;
-
-    if (itemInCart ) {
-      newCount = count;
-      newCartData = this.state.cartData.map((item) =>
-        item._id === id ? { ...item, quantity: newCount } : item
-      );
-    } else {
-      newCount = count;
-      newCartData = [
-        ...this.state.cartData,
-        { ...newItem, quantity: newCount },
-      ];
-    }
-
-    this.setState({
-      cartData: newCartData,
-      count: { ...this.state.count, [id]: newCount },
-    });
   };
 
   removeFromCart = (id) => {
