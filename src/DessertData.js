@@ -4,7 +4,7 @@ import Creme from './assets/images/image-creme-brulee-desktop.jpg';
 import Macron from './assets/images/image-macaron-desktop.jpg';
 import Tiramisu from './assets/images/image-tiramisu-desktop.jpg';
 import Baklava from './assets/images/image-baklava-desktop.jpg';
-import Pie from './assets/images/image-pie-desktop.jpg';
+
 import Cake from './assets/images/image-cake-desktop.jpg';
 import Brownie from './assets/images/image-brownie-desktop.jpg';
 import PannaCotta from './assets/images/image-panna-cotta-desktop.jpg';
@@ -49,7 +49,7 @@ export const DESSERTS = [
     _id: "6",
     dessertName: "pie",
     dessertPrice: 3.49,
-    imgUrl: Pie,
+    imgUrl: Cake,
     description: "Fruit-filled pastry",
   },
   {
