@@ -32,6 +32,7 @@ class DessertCard extends Component {
           className={`h-[13rem] w-[13rem] rounded-lg ${
             count[id] > 0 ? "border-2 border-red-700" : "border-0"
           }`}
+          loading="lazy"
           src={src}
           alt={name}
         />

@@ -12,7 +12,7 @@ function OrderItemList({ edit, onClose }) {
         handleDecrement,
         handleIncrement,
       }) => (
-        <div className=" h-max flex flex-col ">
+        <div className=" h-max flex flex-col max-h-[30vh] overflow-y-scroll ">
           {cartData.length > 0 &&
             cartData.map((orderItem) => (
               <div

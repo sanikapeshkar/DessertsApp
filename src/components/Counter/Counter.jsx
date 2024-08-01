@@ -14,7 +14,7 @@ export default function Counter({
     <div
       className={
         !editCounter
-          ? "absolute top-48 left-8 w-100 px-2 py-2 bg-red-700 flex items-center justify-stretch text-white text-sm rounded-3xl gap-6 text-lg"
+          ? "absolute top-48 left-8 w-100 mx-2 px-2 py-2 bg-red-700 flex items-center justify-stretch text-white text-sm rounded-3xl gap-6 text-lg"
           : "bg-white rounded-full scale-80 border p-1 flex gap-5"
       }
     >

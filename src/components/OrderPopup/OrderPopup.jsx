@@ -25,7 +25,7 @@ function OrderPopup({
     
       <div
         className={twMerge(
-          "relative w-[90%] sm:w-[75%] md:w-[60%] lg:w-[50%] max-h-[100%] p-8 bg-white rounded-sm overflow-y-auto"
+          "relative w-[90%] sm:w-[75%] md:w-[60%] lg:w-[50%] max-h-[95%] p-8 bg-white rounded-md "
         )}
       >
         
