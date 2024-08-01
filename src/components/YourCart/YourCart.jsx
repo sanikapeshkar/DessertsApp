@@ -17,11 +17,11 @@ class YourCart extends Component {
       alert:false
     };
 
-    this.onClose = this.onClose.bind(this);
+    this.closePopup = this.closePopup.bind(this);
     this.onConfirmation = this.onConfirmation.bind(this);
   }
 
-  onClose() {
+  closePopup() {
     this.setState({
       open: false,
       confirmed: false,
@@ -129,7 +129,7 @@ class YourCart extends Component {
             </div>
             {open && (
               <OrderPopup
-                onClose={this.onClose}
+                closePopup={this.closePopup}
                 handleNewOrder={handleNewOrder}
                 totalAmount={this.calculateTotal(cartData)}
                 confirmed={this.state.confirmed}

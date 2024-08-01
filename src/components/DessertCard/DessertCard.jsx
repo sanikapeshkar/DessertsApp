@@ -11,6 +11,8 @@ class DessertCard extends Component {
     this.state = {
       showAddToCart: true,
     };
+
+    this.renderButtons = this.renderButtons.bind(this);
   }
 
   componentDidMount() {
@@ -18,12 +20,33 @@ class DessertCard extends Component {
   }
 
   componentWillUnmount() {
-    this.setState({ showAddToCart: false });
+    // Removing setState in componentWillUnmount to avoid errors.
+  }
+
+  renderButtons(showAddToCart, count, id) {
+    const { handleIncrement, handleDecrement } = this.context;
+    if (showAddToCart && !count[id]) {
+      return (
+        <AddToCart onClick={() => handleIncrement(id)}>
+          <h2 className="text-md">Add to cart</h2>
+        </AddToCart>
+      );
+    } else {
+      return (
+        <Counter
+          id={id}
+          count={count[id]}
+          handleDecrement={() => handleDecrement(id)}
+          handleIncrement={() => handleIncrement(id)}
+          editCounter={false}
+        />
+      );
+    }
   }
 
   render() {
     const { id, src, name, desc, price } = this.props;
-    const { count, handleIncrement, handleDecrement } = this.context;
+    const { count } = this.context;
     const { showAddToCart } = this.state;
 
     return (
@@ -36,19 +59,7 @@ class DessertCard extends Component {
           src={src}
           alt={name}
         />
-        {showAddToCart && !count[id] ? (
-          <AddToCart onClick={() => handleIncrement(id)}>
-            <h2 className="text-md">Add to cart</h2>
-          </AddToCart>
-        ) : (
-          <Counter
-            id={id}
-            count={count[id]}
-            handleDecrement={() => handleDecrement(id)}
-            handleIncrement={() => handleIncrement(id)}
-            editCounter={false}
-          />
-        )}
+        {this.renderButtons(showAddToCart, count, id)}
         <h4 className="mt-7 text-gray-400">{name}</h4>
         <p className="my-1 text-gray-900">{desc}</p>
         <h5 className="my-1 text-red-800">$ {price}</h5>

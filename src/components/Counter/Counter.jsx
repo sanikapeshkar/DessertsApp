@@ -10,6 +10,13 @@ export default function Counter({
   const EditingCounterStyle =
     "py-[1px] px-[7.5px] border-[1.5px] border-red-600 flex items-center justify-center bg-white text-red-600 rounded-full cursor-pointer";
 
+  function checkEditCounter() {
+    if (editCounter) {
+      return counterStyles;
+    } else {
+      return EditingCounterStyle;
+    }
+  }
   return (
     <div
       className={
@@ -22,15 +29,12 @@ export default function Counter({
         onClick={() => {
           editCounter && count <= 1 ? {} : handleDecrement(id);
         }}
-        className={editCounter ? counterStyles : EditingCounterStyle}
+        className={checkEditCounter()}
       >
         -
       </div>
       <div className="text-center">{count}</div>
-      <div
-        onClick={() => handleIncrement(id)}
-        className={editCounter ? counterStyles : EditingCounterStyle}
-      >
+      <div onClick={() => handleIncrement(id)} className={checkEditCounter()}>
         +
       </div>
     </div>
