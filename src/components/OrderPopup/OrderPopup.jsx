@@ -58,7 +58,7 @@ function OrderPopup({
               {edit ? (
                 <h3
                   onClick={() => setEdit(false)}
-                  className="text-slate-600 underline"
+                  className="text-slate-600 underline cursor-pointer"
                 >
                   Save
                 </h3>
@@ -66,7 +66,7 @@ function OrderPopup({
                 <AiFillEdit
                   onClick={() => setEdit(true)}
                   size={35}
-                  className="border border-slate-300 rounded-full p-2 "
+                  className="border border-slate-300 rounded-full p-2 cursor-pointer "
                 />
               )}
 
