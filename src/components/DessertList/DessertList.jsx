@@ -4,6 +4,7 @@ import { DessertPageContext } from "../../context/DessertPageContext";
 
 class DessertList extends Component {
   render() {
+
     return (
       <DessertPageContext.Consumer>
         {({ dessertData }) => (

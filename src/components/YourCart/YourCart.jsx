@@ -5,7 +5,6 @@ import { DessertPageContext } from "../../context/DessertPageContext";
 import OrderItemList from "../OrderItem/OrderItem";
 import { Alert } from "antd";
 
-
 class YourCart extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +13,6 @@ class YourCart extends Component {
       open: false,
       totalPrice: 0,
       confirmed: false,
-      alert:false
     };
 
     this.closePopup = this.closePopup.bind(this);
@@ -47,11 +45,10 @@ class YourCart extends Component {
 
     return (
       <DessertPageContext.Consumer>
-        {({ cartData, handleNewOrder, totalAmount }) => (
-
+        {({ cartData, handleNewOrder, alert, handleAlert }) => (
           <div className="w-max lg:w-[100%] lg:my-16 md:w-[80%] ">
-            {this.state.alert && ( <Alert message="Please Add Items to the Cart" type="warning" closable  />
-      )}
+            {alert && <Alert message={alert} type="warning" closable />}
+
             <div className="my-5 md:my-2 h-max lg:p-4 md:p-3 sm:p-2 rounded-xl border bg-white">
               <h2 className="mb-10 text-red-700 lg:text-xl font-bold md:text-lg sm:text-md">
                 Your Cart ({cartData.length})
@@ -116,7 +113,7 @@ class YourCart extends Component {
                 </div>
               ) : (
                 <>
-                  <OrderItemList />
+                  <OrderItemList edit={true} open={open} />
                   <div className="bg-rose-50 p-2 rounded-sm flex text-slate-400 justify-between ">
                     <h2 className=" ">order Total :</h2>
                     <h2>$ {this.calculateTotal(cartData)}</h2>
@@ -134,7 +131,7 @@ class YourCart extends Component {
                 totalAmount={this.calculateTotal(cartData)}
                 confirmed={this.state.confirmed}
                 onConfirmation={this.onConfirmation}
-            
+                open={open}
               />
             )}
 
@@ -143,12 +140,9 @@ class YourCart extends Component {
                 onClick={() => {
                   cartData.length > 0
                     ? this.setState({ open: true })
-                    :  this.setState({ alert: true })
-
-                    
+                    : handleAlert("Please add items to the cart");
                 }}
               >
-         
                 Confirm Your Order
               </Button>
             </div>

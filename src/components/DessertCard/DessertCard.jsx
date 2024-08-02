@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { PureComponent  } from "react";
 import { DessertPageContext } from "../../context/DessertPageContext";
 import Counter from "../Counter/Counter";
 import AddToCart from "../AddtoCart/AddtoCart";
 
-class DessertCard extends Component {
+class DessertCard extends PureComponent  {
   static contextType = DessertPageContext;
 
   constructor(props) {
@@ -19,9 +19,7 @@ class DessertCard extends Component {
     this.setState({ showAddToCart: true });
   }
 
-  componentWillUnmount() {
-    // Removing setState in componentWillUnmount to avoid errors.
-  }
+  componentWillUnmount() {}
 
   renderButtons(showAddToCart, count, id) {
     const { handleIncrement, handleDecrement } = this.context;

@@ -3,7 +3,7 @@ import OrderItem from "../OrderItem/OrderItem";
 import { Button } from "../Button/Button";
 import { twMerge } from "tailwind-merge";
 import { useState } from "react";
-import { AiFillEdit } from "react-icons/ai";
+
 import { IoIosClose } from "react-icons/io";
 import { Alert } from "antd";
 function OrderPopup({
@@ -12,9 +12,11 @@ function OrderPopup({
   totalAmount,
   confirmed,
   onConfirmation,
+  open,
 }) {
-  const [edit, setEdit] = useState(false);
+  const [edit, setEdit] = useState(true);
   const [alert, setAlert] = useState(false);
+  {console.log(open)}
 
   return (
     <div
@@ -62,21 +64,6 @@ function OrderPopup({
             </p>
 
             <div className="flex gap-5">
-              {edit ? (
-                <h3
-                  onClick={() => setEdit(false)}
-                  className="text-slate-600 underline cursor-pointer"
-                >
-                  Save
-                </h3>
-              ) : (
-                <AiFillEdit
-                  onClick={() => setEdit(true)}
-                  size={35}
-                  className="border border-slate-300 rounded-full p-2 cursor-pointer "
-                />
-              )}
-
               <IoIosClose
                 onClick={() => closePopup()}
                 size={31}
@@ -85,7 +72,7 @@ function OrderPopup({
             </div>
           </div>
         )}
-        <OrderItem edit={edit} closePopup={closePopup} />
+        <OrderItem edit={edit} closePopup={closePopup} open={open} />
 
         <div className="p-2 flex justify-between bg-rose-50 text-slate-500">
           <h2 className="font-semibold">Order Total :</h2>

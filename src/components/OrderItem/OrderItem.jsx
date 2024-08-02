@@ -3,9 +3,10 @@ import { DessertPageContext } from "../../context/DessertPageContext";
 import Counter from "../Counter/Counter";
 import { useContext } from "react";
 
-function OrderItemList({ edit, closePopup }) {
+function OrderItemList({ edit, closePopup, open }) {
   const { cartData, removeFromCart, count, handleDecrement, handleIncrement } =
     useContext(DessertPageContext);
+
   return (
     <div className=" h-max flex flex-col max-h-[30vh] overflow-y-scroll ">
       {cartData.length > 0 &&
@@ -27,7 +28,8 @@ function OrderItemList({ edit, closePopup }) {
                       @ $
                       {(orderItem.quantity * orderItem.dessertPrice).toFixed(2)}
                     </h4>
-                    {edit && (
+               
+                    {edit && open && (
                       <Counter
                         id={orderItem._id}
                         count={count[orderItem._id]}
@@ -40,8 +42,8 @@ function OrderItemList({ edit, closePopup }) {
                 </div>
               </div>
             </div>
-            {edit && (
-              <IoIosCloseCircleOutline
+        
+            {edit&&  <IoIosCloseCircleOutline
                 className="m-2 cursor-pointer"
                 onClick={() => {
                   if (cartData.length === 1) {
@@ -51,8 +53,8 @@ function OrderItemList({ edit, closePopup }) {
                     removeFromCart(orderItem._id);
                   }
                 }}
-              />
-            )}
+              />}
+         
           </div>
         ))}
     </div>

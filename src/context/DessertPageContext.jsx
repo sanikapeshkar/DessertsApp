@@ -10,6 +10,7 @@ class DessertPageContextProvider extends Component {
       dessertData: DESSERTS,
       cartData: [],
       count: {},
+      alert: null,
     };
   }
 
@@ -18,15 +19,21 @@ class DessertPageContextProvider extends Component {
       (item) => item._id === id
     );
 
+    if (this.state.count[id] >= 10) {
+      this.handleAlert("You cannot add more than 10 items ");
+      return;
+    }
     if (increementedItem) {
-      this.setState({
-        cartData: this.state.cartData.map((item) =>
-          item._id === id
-            ? { ...item, quantity: increementedItem.quantity + 1 }
-            : item
-        ),
-        count: { ...this.state.count, [id]: increementedItem.quantity + 1 },
-      });
+      if (increementedItem.quantity < 10) {
+        this.setState({
+          cartData: this.state.cartData.map((item) =>
+            item._id === id
+              ? { ...item, quantity: increementedItem.quantity + 1 }
+              : item
+          ),
+          count: { ...this.state.count, [id]: increementedItem.quantity + 1 },
+        });
+      }
     } else {
       const newItem = this.state.dessertData.find((item) => item._id === id);
       this.setState({
@@ -76,6 +83,16 @@ class DessertPageContextProvider extends Component {
     });
   };
 
+  handleAlert=(message) =>{
+  
+    this.setState({
+      alert: message,
+    });
+    setTimeout(() => {
+      this.setState({ alert: null });
+    }, 3000);
+  }
+
   handleNewOrder = () => {
     this.setState({
       cartData: [],
@@ -90,11 +107,13 @@ class DessertPageContextProvider extends Component {
           dessertData: this.state.dessertData,
           cartData: this.state.cartData,
           count: this.state.count,
+          alert: this.state.alert,
           addToCart: this.addToCart,
           removeFromCart: this.removeFromCart,
           handleIncrement: this.handleIncrement,
           handleDecrement: this.handleDecrement,
           handleNewOrder: this.handleNewOrder,
+          handleAlert: this.handleAlert,
         }}
       >
         {this.props.children}

@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export default function Counter({
   id,
   count,
@@ -17,6 +19,7 @@ export default function Counter({
       return EditingCounterStyle;
     }
   }
+
   return (
     <div
       className={
@@ -34,7 +37,10 @@ export default function Counter({
         -
       </div>
       <div className="text-center">{count}</div>
-      <div onClick={() => handleIncrement(id)} className={checkEditCounter()}>
+      <div
+        onClick={() => (handleIncrement(id))}
+        className={checkEditCounter()}
+      >
         +
       </div>
     </div>
