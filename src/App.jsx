@@ -4,6 +4,8 @@ import YourCart from "./components/YourCart/YourCart";
 import DessertPageContextProvider from "./context/DessertPageContext";
 import { FaShoppingCart } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
+import './index.css';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +20,7 @@ class App extends Component {
     }));
   };
 
+  
   render() {
     const { isCartVisible } = this.state;
 
@@ -40,9 +43,9 @@ class App extends Component {
               isCartVisible ? "sm:block md:block" : "sm:hidden md:hidden"
             }  lg:relative lg:w-2/6 lg:bg-transparent lg:bg-opacity-100 lg:px-0 lg:py-0 lg:block flex items-center justify-center`}
           >
-            <div className=" md:w-[50%] lg:bg-transparent lg:px-0 sm:bg-white sm:mx-2 sm:px-1 sm:py-4 sm:rounded-md ">
+            <div className="relative md:w-[50%] lg:bg-transparent lg:px-0 sm:bg-white sm:mx-2 sm:px-1 sm:py-4 sm:rounded-md ">
             <YourCart count={5} />
-            <IoIosClose size={25} color='#adadad' className="z-5 absolute top-1 right-1 sm:block lg:hidden cursor-pointer " onClick={this.toggleCartVisibility}/>
+            <IoIosClose size={25}  className="z-5 absolute top-1 right-1 sm:block lg:hidden cursor-pointer " onClick={this.toggleCartVisibility}/>
             </div>
           </div>
         </div>

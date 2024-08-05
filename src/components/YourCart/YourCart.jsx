@@ -47,8 +47,8 @@ class YourCart extends Component {
     return (
       <DessertPageContext.Consumer>
         {({ cartData, handleNewOrder, alert, handleAlert }) => (
-          <div className="w-full lg:w-[100%] lg:my-8 p-4">
-            {alert && <Alert message={alert} type="warning" closable />}
+          <div className="lg:fixed w-full lg:w-[100%] lg:my-6 p-4">
+            {alert && <Alert message={alert} type="warning" closable className="z-100 absolute top-0 right-0 "/>}
 
             <div className="lg:my-0 lg:w-[300px] lg:my-5 h-max lg:p-4 md:p-3 md:w-[100%] sm:p-2 rounded-xl border bg-white">
               <h2 className="mb-10 text-red-700 lg:text-xl font-bold md:text-lg sm:text-md">

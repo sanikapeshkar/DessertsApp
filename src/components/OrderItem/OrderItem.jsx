@@ -8,7 +8,7 @@ function OrderItemList({ edit, closePopup, open }) {
     useContext(DessertPageContext);
 
   return (
-    <div className="h-max flex flex-col max-h-[30vh] overflow-y-scroll lg:w-full">
+    <div className="h-max flex flex-col max-h-[30vh] overflow-y-scroll lg:w-full  scrollbar-thin">
       {cartData.length > 0 &&
         cartData.map((orderItem) => (
           <div

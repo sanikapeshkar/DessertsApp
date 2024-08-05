@@ -6,6 +6,7 @@
       extend: {
      screens:{
        md:"760px",
+       
        sm:'100px'
     },
     fontFamily: {
@@ -14,5 +15,9 @@
     },
    },
     },
-    plugins: [],
+    plugins: [
+      require('@tailwindcss/typography'),
+     
+    ],
   }
+  

@@ -2,11 +2,12 @@ import { IoCheckmarkDoneCircle } from "react-icons/io5";
 import OrderItem from "../OrderItem/OrderItem";
 import { Button } from "../Button/Button";
 import { twMerge } from "tailwind-merge";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import { IoIosClose } from "react-icons/io";
 import { Alert } from "antd";
 import { useClickOutside } from "../../customHooks/useClickOutside";
+import { DessertPageContext } from "../../context/DessertPageContext";
 function OrderPopup({
   closePopup,
   handleNewOrder,
@@ -16,7 +17,7 @@ function OrderPopup({
   open,
 }) {
   const [edit, setEdit] = useState(true);
-  const [alert, setAlert] = useState(false);
+  const { alert, handleAlert } = useContext(DessertPageContext);
 
   let domNode = useClickOutside(() => {
     closePopup();
@@ -34,6 +35,7 @@ function OrderPopup({
           "relative w-[90%] sm:w-[75%] md:w-[60%] lg:w-[50%] max-h-[95%] p-8 bg-white rounded-md "
         )}
       >
+     
         {confirmed ? (
           <div className="flex justify-between mb-2">
             <div>
@@ -41,17 +43,12 @@ function OrderPopup({
                 className="text-green-500 text-4xl mb-2"
                 size={30}
               />
+     
               <h3 className="text-black text-3xl font-bold">Order Confirmed</h3>
               <p className="mb-5 mt-2 mx-1 text-slate-400 text-sm">
                 We hope you enjoy your food !
               </p>
-              {alert && (
-                <Alert
-                  message="Your Order is Confirmed"
-                  type="success"
-                  closable
-                />
-              )}
+              {alert && <Alert message={alert} type="success" closable />}
             </div>
             <IoIosClose
               onClick={() => {
@@ -63,6 +60,9 @@ function OrderPopup({
             />
           </div>
         ) : (
+          <>
+                      {alert && <Alert message={alert} type="warning" closable  className=" top-0 right-0  my-2 "/>}
+       
           <div className="flex gap-10  justify-between">
             <p className="font-semibold text-xl mb-5">
               Kindly confirm your order{" "}
@@ -76,6 +76,7 @@ function OrderPopup({
               />
             </div>
           </div>
+          </>
         )}
         <OrderItem edit={edit} closePopup={closePopup} open={open} />
 
@@ -100,7 +101,7 @@ function OrderPopup({
             <Button
               onClick={() => {
                 onConfirmation();
-                setAlert(true);
+                handleAlert("Your Order is confirmed");
                 setEdit(false);
               }}
             >
