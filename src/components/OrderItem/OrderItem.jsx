@@ -8,22 +8,22 @@ function OrderItemList({ edit, closePopup, open }) {
     useContext(DessertPageContext);
 
   return (
-    <div className=" h-max flex flex-col max-h-[30vh] overflow-y-scroll ">
+    <div className="h-max flex flex-col max-h-[30vh] overflow-y-scroll lg:w-full">
       {cartData.length > 0 &&
         cartData.map((orderItem) => (
           <div
             key={orderItem._id}
-            className="flex justify-between items-center bg-rose-50  border-b p-2 rounded-sm"
+            className="flex justify-between items-center bg-rose-50 border-b p-2 rounded-sm"
           >
             <div className="flex gap-4 align-center">
-              <img src={orderItem.imgUrl} className="h-16 w-16"></img>
+              <img src={orderItem.imgUrl} className="lg:h-16 lg:w-16 sm:h-10 sm:w-10"></img>
               <div>
                 <h3 className="font-semibold">{orderItem.dessertName}</h3>
-                <div className="flex gap-1">
+                <div className="flex lg:flex-row sm:flex-col gap-1">
                   <p className="text-red-700 font-bold text-sm">
                     {orderItem.quantity}x
                   </p>
-                  <div className="flex gap-10 text-slate-400 text-sm italic font-semibold">
+                  <div className="flex lg:flex-row sm:flex-col sm:gap-0 sm:-left-10 sm:h-16  gap-10 text-slate-400 text-sm italic font-semibold">
                     <h4>
                       @ $
                       {(orderItem.quantity * orderItem.dessertPrice).toFixed(2)}

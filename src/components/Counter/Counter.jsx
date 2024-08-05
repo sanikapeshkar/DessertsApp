@@ -8,38 +8,35 @@ export default function Counter({
   editCounter,
 }) {
   const counterStyles =
-    "py-[1px] px-[7.5px] border-[1.5px] border-white flex items-center justify-center bg-red-600 hover:bg-white text-white hover:text-red-600 rounded-full cursor-pointer";
-  const EditingCounterStyle =
-    "py-[1px] px-[7.5px] border-[1.5px] border-red-600 flex items-center justify-center bg-white text-red-600 rounded-full cursor-pointer";
+    "h-8 w-8 py-[1px] px-[10px] border-[1.5px] border-white flex items-center justify-center bg-red-600 hover:bg-white text-white hover:text-red-600 rounded-full cursor-pointer";
+  const editingCounterStyle =
+    " h-7 w-7 py-[1px] px-[0.5px] border-[1.5px] border-red-600 flex items-center justify-center bg-white text-red-600 rounded-full cursor-pointer";
 
-  function checkEditCounter() {
-    if (editCounter) {
-      return counterStyles;
-    } else {
-      return EditingCounterStyle;
-    }
+  function getCounterStyle() {
+    return editCounter ? counterStyles : editingCounterStyle;
   }
 
   return (
     <div
       className={
-        !editCounter
-          ? "absolute top-48 left-8 w-100 mx-2 px-2 py-2 bg-red-700 flex items-center justify-stretch text-white text-sm rounded-3xl gap-6 text-lg"
-          : "bg-white rounded-full scale-80 border p-1 flex gap-5"
+        editCounter
+          ? "bg-white rounded-full md:scale-50 sm:scale-50  border py-4 px-3 flex lg:gap-7 sm:gap-10 sm:text-xl"
+          : "absolute top-48 sm:left-7 md:left-10 w-100 mx-2 px-2 py-2 bg-red-700 flex items-center justify-stretch text-white text-sm rounded-3xl gap-6 text-lg gap-10"
       }
     >
       <div
         onClick={() => {
-          editCounter && count <= 1 ? {} : handleDecrement(id);
+          if (editCounter && count <= 1) return;
+          handleDecrement(id);
         }}
-        className={checkEditCounter()}
+        className={getCounterStyle()}
       >
         -
       </div>
       <div className="text-center">{count}</div>
       <div
-        onClick={() => (handleIncrement(id))}
-        className={checkEditCounter()}
+        onClick={() => handleIncrement(id)}
+        className={getCounterStyle()}
       >
         +
       </div>

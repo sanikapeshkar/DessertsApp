@@ -25,7 +25,7 @@ function OrderPopup({
   return (
     <div
       className={twMerge(
-        "fixed inset-0 bg-black bg-opacity-25 flex items-center justify-center"
+        "z-20 fixed inset-0 bg-black bg-opacity-25 flex items-center justify-center"
       )}
     >
       <div

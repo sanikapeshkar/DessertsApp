@@ -31,6 +31,7 @@ class YourCart extends Component {
       confirmed: true,
     });
   }
+
   calculateTotal(cartData) {
     let totalAmount = 0;
     cartData.forEach((item) => {
@@ -46,21 +47,22 @@ class YourCart extends Component {
     return (
       <DessertPageContext.Consumer>
         {({ cartData, handleNewOrder, alert, handleAlert }) => (
-          <div className="w-max lg:w-[100%] lg:my-16 md:w-[80%] ">
+          <div className="w-full lg:w-[100%] lg:my-8 p-4">
             {alert && <Alert message={alert} type="warning" closable />}
 
-            <div className="my-5 md:my-2 h-max lg:p-4 md:p-3 sm:p-2 rounded-xl border bg-white">
+            <div className="lg:my-0 lg:w-[300px] lg:my-5 h-max lg:p-4 md:p-3 md:w-[100%] sm:p-2 rounded-xl border bg-white">
               <h2 className="mb-10 text-red-700 lg:text-xl font-bold md:text-lg sm:text-md">
                 Your Cart ({cartData.length})
               </h2>
-              {!cartData.length > 0 ? (
+              {cartData.length === 0 ? (
                 <div className="flex justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="158"
-                    height="228"
+                    width="258"
+                    height="128"
                     fill="none"
                     viewBox="0 0 128 128"
+                    className="w-full max-w-xs"
                   >
                     <path
                       fill="#260F08"
@@ -115,11 +117,11 @@ class YourCart extends Component {
                 <>
                   <OrderItemList edit={true} open={open} />
                   <div className="bg-rose-50 p-2 rounded-sm flex text-slate-400 justify-between ">
-                    <h2 className=" ">order Total :</h2>
+                    <h2 className=" ">Order Total:</h2>
                     <h2>$ {this.calculateTotal(cartData)}</h2>
                   </div>
                   <div className="my-2 p-3 md:p-2 text-md md:text-sm bg-rose-50 rounded-xl">
-                    This is a carbon neutral delivery
+                    This is a carbon-neutral delivery.
                   </div>
                 </>
               )}
@@ -135,7 +137,7 @@ class YourCart extends Component {
               />
             )}
 
-            <div className="flex justify-center">
+            <div className="flex lg:w-[300px] my-2">
               <Button
                 onClick={() => {
                   cartData.length > 0
