@@ -6,6 +6,7 @@ import { useState } from "react";
 
 import { IoIosClose } from "react-icons/io";
 import { Alert } from "antd";
+import { useClickOutside } from "../../customHooks/useClickOutside";
 function OrderPopup({
   closePopup,
   handleNewOrder,
@@ -16,25 +17,22 @@ function OrderPopup({
 }) {
   const [edit, setEdit] = useState(true);
   const [alert, setAlert] = useState(false);
-  const handleOutsideClick = (e) => {
-    e.stopPropagation();
-    if (e.target === e.currentTarget) {
-      closePopup()
-    }
-  };
+
+  let domNode = useClickOutside(() => {
+    closePopup();
+  });
 
   return (
     <div
       className={twMerge(
         "fixed inset-0 bg-black bg-opacity-25 flex items-center justify-center"
       )}
-
-      onClick={handleOutsideClick}
     >
       <div
+        ref={domNode}
         className={twMerge(
           "relative w-[90%] sm:w-[75%] md:w-[60%] lg:w-[50%] max-h-[95%] p-8 bg-white rounded-md "
-        )} onClick={(e) => e.stopPropagation()}
+        )}
       >
         {confirmed ? (
           <div className="flex justify-between mb-2">
